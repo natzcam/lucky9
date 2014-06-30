@@ -1,0 +1,414 @@
+/* 
+    Document   : newcss
+    Created on : 03 18, 13, 3:11:30 PM
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*--start of clubs--*/
+.ace-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: 0px 0px;
+  width:72px;
+  height:98px;
+}
+
+.two-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -73px 0px;
+  width:72px;
+  height:98px;
+}
+
+.three-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -146px 0px;
+  width:72px;
+  height:98px;
+}
+
+.four-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -219px 0px;
+  width:72px;
+  height:98px;
+}
+
+.five-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -292px 0px;
+  width:72px;
+  height:98px;
+}
+
+.six-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -365px 0px;
+  width:72px;
+  height:98px;
+}
+
+.seven-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -438px 0px;
+  width:72px;
+  height:98px;
+}
+
+.eight-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -511px 0px;
+  width:72px;
+  height:98px;
+}
+
+.nine-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -584px 0px;
+  width:72px;
+  height:98px;
+}
+
+.ten-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -657px 0px;
+  width:72px;
+  height:98px;
+}
+
+.jack-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -730px 0px;
+  width:72px;
+  height:98px;
+}
+
+.queen-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -803px 0px;
+  width:72px;
+  height:98px;
+}
+
+.king-clubs {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -876px 0px;
+  width:72px;
+  height:98px;
+}
+/*--end of clubs--*/
+
+/*--start of spades--*/
+.ace-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: 0px -98px;
+  width:72px;
+  height:98px;
+}
+
+.two-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -73px -98px;
+  width:72px;
+  height:98px;
+}
+
+.three-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -146px -98px;
+  width:72px;
+  height:98px;
+}
+
+.four-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -219px -98px;
+  width:72px;
+  height:98px;
+}
+
+.five-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -292px -98px;
+  width:72px;
+  height:98px;
+}
+
+.six-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -365px -98px;
+  width:72px;
+  height:98px;
+}
+
+.seven-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -438px -98px;
+  width:72px;
+  height:98px;
+}
+
+.eight-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -511px -98px;
+  width:72px;
+  height:98px;
+}
+
+.nine-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -584px -98px;
+  width:72px;
+  height:98px;
+}
+
+.ten-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -657px -98px;
+  width:72px;
+  height:98px;
+}
+
+.jack-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -730px -98px;
+  width:72px;
+  height:98px;
+}
+
+.queen-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -803px -98px;
+  width:72px;
+  height:98px;
+}
+
+.king-spades {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -876px -98px;
+  width:72px;
+  height:98px;
+}
+/*--end of spades--*/
+
+/*--start of hearts--*/
+.ace-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: 0px -196px;
+  width:72px;
+  height:98px;
+}
+
+.two-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -73px -196px;
+  width:72px;
+  height:98px;
+}
+
+.three-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -146px -196px;
+  width:72px;
+  height:98px;
+}
+
+.four-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -219px -196px;
+  width:72px;
+  height:98px;
+}
+
+.five-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -292px -196px;
+  width:72px;
+  height:98px;
+}
+
+.six-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -365px -196px;
+  width:72px;
+  height:98px;
+}
+
+.seven-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -438px -196px;
+  width:72px;
+  height:98px;
+}
+
+.eight-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -511px -196px;
+  width:72px;
+  height:98px;
+}
+
+.nine-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -584px -196px;
+  width:72px;
+  height:98px;
+}
+
+.ten-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -657px -196px;
+  width:72px;
+  height:98px;
+}
+
+.jack-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -730px -196px;
+  width:72px;
+  height:98px;
+}
+
+.queen-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -803px -196px;
+  width:72px;
+  height:98px;
+}
+
+.king-hearts {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -876px -196px;
+  width:72px;
+  height:98px;
+}
+/*--end of hearts--*/
+
+/*--start of diamonds--*/
+.ace-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: 0px -294px;
+  width:72px;
+  height:98px;
+}
+.two-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -73px -294px;
+  width:72px;
+  height:98px;
+}
+
+.three-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -146px -294px;
+  width:72px;
+  height:98px;
+}
+
+.four-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -219px -294px;
+  width:72px;
+  height:98px;
+}
+
+.five-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -292px -294px;
+  width:72px;
+  height:98px;
+}
+
+.six-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -365px -294px;
+  width:72px;
+  height:98px;
+}
+
+.seven-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -438px -294px;
+  width:72px;
+  height:98px;
+}
+
+.eight-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -511px -294px;
+  width:72px;
+  height:98px;
+}
+
+.nine-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -584px -294px;
+  width:72px;
+  height:98px;
+}
+
+.ten-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -657px -294px;
+  width:72px;
+  height:98px;
+}
+
+.jack-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -730px -294px;
+  width:72px;
+  height:98px;
+}
+
+.queen-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -803px -294px;
+  width:72px;
+  height:98px;
+}
+
+.king-diamonds {
+  background-image: url('#{request.contextPath}/resources/images/cards.png');
+  background-position: -876px -294px;
+  width:72px;
+  height:98px;
+}
+/*--end of diamonds--*/
+
+.card-back {
+  background-image: url('#{request.contextPath}/resources/images/card_back.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width:72px;
+  height:98px;
+}
+
+/*--custom--*/
+.currentPlayerRow{
+  background-color: yellow;
+}
+
+.currentPlayerRow tr{
+  background-color: yellow;
+}
+
+.scoreStr{
+  background-color:lime;
+}
+
+.gameStatus {
+  height: 500px !important;
+  max-height: 500px !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  padding:5px;
+}
+
+.endGameMessage{
+  text-align: center;
+  width:100%;
+  font-size: 20px !important;
+  display:block;
+}

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+  <ui:composition template="/template/indexTemplate.xhtml">
+    <f:metadata>
+      <f:viewParam name="ac" value="#{activationController.activationCode}"/>
+      <f:event listener="#{activationController.activate()}" type="preRenderView"/>
+    </f:metadata>
+    <ui:define name="centerContent">
+      <h:form styleClass="forceCenter">
+        <p:panelGrid id="signupGrid" columns="2">  
+          <p:outputLabel for="email" value="Email" />  
+          <p:inputText id="email" required="true" value="#{signupController.email}"/> 
+          <p:outputLabel for="password" value="Password" />  
+          <p:password id="password" required="true" value="#{signupController.rawPassword}"/>  
+          <p:outputLabel for="confirmPassword" value="Confirm Password" />  
+          <p:password id="confirmPassword" required="true" value="#{signupController.confirmPassword}"/>  
+        </p:panelGrid>
+        <p:commandButton value="Signup" update="@form" action="#{signupController.signup}" />
+        <h:link styleClass="paddingAll" outcome="login" value="Already have an account?"/>
+        <div>
+          <div style="display: inline-block">
+            <p:messages autoUpdate="true" closable="true"/>
+          </div>
+        </div>
+      </h:form>
+    </ui:define>
+  </ui:composition>
+</html>
+

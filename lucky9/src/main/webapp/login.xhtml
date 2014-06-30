@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+  <ui:composition template="/template/indexTemplate.xhtml">
+    <ui:define name="centerContent">
+      <h:form styleClass="forceCenter">
+        <p:panelGrid id="loginGrid" columns="2">  
+          <p:outputLabel for="email" value="Email" />  
+          <p:inputText id="email" required="true" value="#{loginController.email}"/> 
+          <p:outputLabel for="password" value="Password" />  
+          <p:password id="password" required="true" value="#{loginController.password}"/> 
+        </p:panelGrid> 
+        <p:commandButton value="Login" update="@form" action="#{loginController.login}" />
+        <h:link styleClass="paddingAll" outcome="signup" value="No account yet?"/>
+        <div>
+          <div style="display: inline-block">
+            <p:messages autoUpdate="true" closable="true"/>
+          </div>
+        </div>
+      </h:form>
+    </ui:define>
+  </ui:composition>
+</html>
+

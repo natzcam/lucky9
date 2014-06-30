@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+  <h:head>
+    <f:facet name="first">
+      <meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+      <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+      <title>
+        <ui:insert name="title">
+          Lucky9
+        </ui:insert>
+      </title>
+    </f:facet>
+    <h:outputScript library="js" name="common.js"/>
+    <h:outputStylesheet library="css" name="common.css"/>
+    <ui:insert name="addHead"></ui:insert>
+  </h:head>
+  <h:body>
+    <h:form>
+      <p:notificationBar  autoDisplay="#{!gameListController.sessionAccount.activated}" position="top" effect="slide" widgetVar="notifbar" >  
+        Activation mail sent to <span class="bold">#{gameListController.sessionAccount.email}</span>. Please check your inbox.
+        <p:commandButton styleClass="marginLeft" type="button" value="Ok, got it." onclick="PF('notifbar').hide();"/>   
+      </p:notificationBar>
+    </h:form>
+    <p:layout fullPage="true">
+      <p:layoutUnit id="header" position="north">
+        <ui:insert name="headerContent" >
+          <h:form id="headerContentForm">
+            <p:menubar>
+              <p:submenu label="#{gameListController.sessionAccount.email}" icon="ui-icon-document">
+                <p:menuitem rendered="#{!gameListController.sessionAccount.activated}" value="Resend Activation" action="#{activationController.resend}"/>
+                <p:menuitem value="Set Name" />
+              </p:submenu>
+              <f:facet name="options">
+                <p:commandButton value="Logout" action="#{loginController.logout}" icon="ui-icon-extlink" />
+              </f:facet>
+            </p:menubar>
+          </h:form>
+        </ui:insert>
+      </p:layoutUnit>
+      <p:layoutUnit id="center" position="center" >
+        <ui:insert name="centerContent">
+        </ui:insert>
+      </p:layoutUnit>
+      <ui:insert name="rightContent">
+      </ui:insert>
+      <p:layoutUnit position="south" size="40">  
+        <p:ajaxStatus>  
+          <f:facet name="start">  
+            <p:graphicImage value="/resources/images/ajax-loader.gif" />  
+          </f:facet>  
+          <f:facet name="complete">  
+            <h:outputText value=""/>
+          </f:facet>  
+        </p:ajaxStatus>
+      </p:layoutUnit> 
+    </p:layout>
+  </h:body>
+</html>
+

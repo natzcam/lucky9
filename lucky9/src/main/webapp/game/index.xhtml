@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+  <ui:composition template="/template/loggedInTemplate.xhtml">
+    <ui:define name="centerContent">
+      <h:form id="form" >
+        <p:dataTable style="width:500px;" id="gamesTable" var="game" value="#{gameListController.games}" selectionMode="single" rowKey="#{game.id}">
+          <p:ajax event="rowSelect" listener="#{gameListController.join}" />
+          <p:column headerText="Name">
+            <h:outputText value="#{game.name}" />
+          </p:column>
+        </p:dataTable>
+      </h:form>
+    </ui:define>
+  </ui:composition>
+</html>
+

@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+  <ui:composition template="/template/loggedInTemplate.xhtml">
+    <ui:define name="addHead">
+      <h:outputScript library="js" name="cards.js"/>
+      <h:outputStylesheet library="css" name="cards.css"/>
+    </ui:define>
+    <ui:define name="headerContent">
+      <h:form id="headerContentForm">
+        <p:menubar>
+          <p:submenu label="#{gameListController.sessionAccount.email}" icon="ui-icon-document">
+            <p:menuitem rendered="#{!gameListController.sessionAccount.activated}" value="Resend Activation" action="#{activationController.resend}"/>
+            <p:menuitem value="Set Name" />
+          </p:submenu>
+          <f:facet name="options">
+            <p:outputLabel id="creditLabel" styleClass="marginRight" value="Credit: #{playController.account.credit}"/>
+            <p:commandButton value="Leave Game" action="#{playController.disconnect}" />
+            <p:commandButton value="Logout" action="#{loginController.logout}" icon="ui-icon-extlink" />
+          </f:facet>
+        </p:menubar>
+      </h:form>
+    </ui:define>
+    <ui:define name="centerContent">
+      <h:form id="gameForm">
+        <!--        remote commands-->
+        <p:remoteCommand name="updateAll" update="gameForm,:headerContentForm:creditLabel,:resultsDialogForm" process="@this" oncomplete="updateComplete()"/>
+        <p:remoteCommand name="connect" action="#{playController.connect}" process="@this" />
+        <!--        remote commands-->
+
+        <p:outputPanel id="gameControls">
+          <p:commandButton title="Set your wager for the upcoming game" rendered="#{playController.game.state == 'BETTING'}" onclick="PF('betDialog').show()" value="Set Bet"/>
+          <p:selectOneButton disabled="#{!playController.isCurrent(playController.account)}" rendered="#{playController.game.state == 'PLAYING'}" value="#{playController.hit}">
+            <f:selectItem itemLabel="Hit" itemValue="1" />
+            <f:selectItem itemLabel="Stand" itemValue="0" />
+            <p:ajax listener="#{playController.hitChange}" />
+          </p:selectOneButton>
+        </p:outputPanel>
+
+        <p:dataTable style="width:900px;" styleClass="marginTop" rowStyleClass="#{playController.isCurrent(player)?'currentPlayerRow':''}" id="playerTable" var="player" value="#{playController.playersWithBanker}">
+          <p:column headerText="Name">
+            <h:outputText value="#{player.name}" />
+            <h:outputText rendered="#{playController.game.banker == player}" value=" (Dealer)" />
+            <h:outputText rendered="#{playController.account == player}" value=" (Me)" />
+          </p:column>
+          <p:column headerText="Bet" width="20">
+            <h:outputText rendered="#{!playController.isBanker(player)}" value="#{player.bet}" />
+          </p:column>
+          <p:column headerText="Cards">
+            <ui:repeat var="card"  value="#{player.cards}" >
+              <div style="float:left" class="#{card.toClass(playController.account == player)}"></div>
+            </ui:repeat>
+          </p:column>
+          <p:column headerText="Score" width="100">
+            <h:outputText rendered="#{playController.game.state == 'BETTING' or playController.account == player}" value="#{player.scoreBreakdown} " />
+            <h:outputText rendered="#{playController.game.state == 'BETTING' or playController.account == player}" styleClass="scoreStr" value="(#{player.score})" />
+          </p:column>
+          <p:column headerText="Win" width="100">
+            <h:outputText value="#{player.win} " />
+          </p:column>
+        </p:dataTable>
+
+        <p:dataTable style="width:400px;" id="standbyPlayerTable" styleClass="marginTop" var="player" value="#{playController.standbyPlayers}">
+          <p:column headerText="Sit Out">
+            <h:outputText value="#{player.name}" />
+          </p:column>
+        </p:dataTable>
+      </h:form>
+      <p:dialog id="resultsDialog" widgetVar="resultsDialog" appendTo="@(body)" modal="true" header="Game Results">
+        <h:form id="resultsDialogForm">
+          <p:outputLabel styleClass="endGameMessage" value="#{playController.endGameMessage}"/>
+          <p:dataTable style="width:500px;" rowStyleClass="playerRow" var="player" value="#{playController.playersWithBanker}">
+            <p:column headerText="Name">
+              <h:outputText value="#{player.name}" />
+            </p:column>
+            <p:column headerText="Score" width="30">
+              <h:outputText value=" #{player.score}" />
+            </p:column>
+            <p:column headerText="Win/Loss" width="50">
+              <h:outputText value="#{player.win} " />
+            </p:column>
+          </p:dataTable>
+        </h:form>
+      </p:dialog>
+      <p:dialog id="betDialog" widgetVar="betDialog" appendTo="@(body)" modal="true" header="Your Bet">
+        <h:form id="betDialogForm">
+          <p:inputText label="Bet: " value="#{playController.bet}" />
+          <p:commandButton action="#{playController.submitBet}" value="Submit" update="@form" oncomplete="if(!args.validationFailed)PF('betDialog').hide();"/>
+          <div>
+            <div style="display: inline-block">
+              <p:messages autoUpdate="true" closable="true"/>
+            </div>
+          </div>
+        </h:form>
+      </p:dialog>
+      <p:socket onError="handleError" onMessage="handleMessage" channel="/game/#{playController.game.id}/#{playController.account.id}" autoConnect="true" widgetVar='subscriber' />
+    </ui:define>
+    <ui:define name="rightContent">
+      <p:layoutUnit id="left" position="east" size="400">
+        <p:outputPanel styleClass="ui-corner-all ui-widget-content gameStatus" layout="block" id="gameStatus">  
+        </p:outputPanel>
+      </p:layoutUnit>
+    </ui:define>
+  </ui:composition>
+</html>
+
