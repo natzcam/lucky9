@@ -4,9 +4,8 @@ var currMessage;
 function handleMessage(message) {
   currMessage = message;
   console.log("command:" + message.command);
-  if (message.command === "CONNECT") {
-    connect();
-  } else if (message.command === "UPDATE_LIST") {
+
+  if (message.command === "UPDATE_LIST") {
     updateAll();
   } else if (message.command === 'SET_BET') {
     updateAll();

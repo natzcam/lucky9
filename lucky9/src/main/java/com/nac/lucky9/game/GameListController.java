@@ -47,7 +47,8 @@ public class GameListController {
   public void join(SelectEvent event) {
     Game game = (Game) event.getObject();
     playController.setGame(game);
-    playController.setAccount(getSessionAccount());
+    playController.setAccountId(getSessionAccount().getId());
+    playController.connect();
     try {
       Faces.redirect("game/game.xhtml");
     } catch (IOException ex) {

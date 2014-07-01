@@ -29,7 +29,6 @@
       <h:form id="gameForm">
         <!--        remote commands-->
         <p:remoteCommand name="updateAll" update="gameForm,:headerContentForm:creditLabel,:resultsDialogForm" process="@this" oncomplete="updateComplete()"/>
-        <p:remoteCommand name="connect" action="#{playController.connect}" process="@this" />
         <!--        remote commands-->
 
         <p:outputPanel id="gameControls">

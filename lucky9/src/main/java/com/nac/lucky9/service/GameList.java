@@ -20,27 +20,27 @@ import org.primefaces.push.EventBusFactory;
 @Singleton
 @Startup
 public class GameList implements Serializable {
-  
+
   private final EventBus eventBus = EventBusFactory.getDefault().eventBus();
   @EJB
   private AccountService accountService;
-  
+
   private List<Game> games = new ArrayList<>();
-  
+
   @PostConstruct
-  public void init(){
+  public void init() {
     List<Account> bankers = accountService.findBankerAccounts();
-    for(Account banker: bankers){
+    for (Account banker : bankers) {
       games.add(new Game(banker));
     }
   }
-  
+
   public List<Game> getGames() {
     return games;
   }
-  
+
   public Game getGame(Long id) {
-    
+
     for (Game g : games) {
       if (g.getId().equals(id)) {
         return g;
@@ -48,14 +48,14 @@ public class GameList implements Serializable {
     }
     return null;
   }
-  
-  public Game getCurrentGame(Account player) {
+
+  public Game getCurrentGame(Long accountId) {
     for (Game g : games) {
-      if (g.getPlayers().contains(player)) {
+      if (g.findPlayer(accountId) != null) {
         return g;
       }
     }
     return null;
   }
-  
+
 }

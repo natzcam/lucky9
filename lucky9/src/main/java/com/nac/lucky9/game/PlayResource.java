@@ -34,7 +34,7 @@ public class PlayResource {
   @OnOpen
   public void onOpen(RemoteEndpoint r, EventBus eventBus) {
     Lucky9.infoInternal("onOpen " + gameId + ":" + accountId);
-    eventBus.publish("/game/" + gameId + "/" + accountId, new Command(Long.parseLong(accountId), "CONNECT", null));
+    eventBus.publish("/game/*", new Command(Long.parseLong(accountId), "UPDATE_LIST", null));
   }
 
   @OnClose

@@ -29,7 +29,7 @@ public class PlayController implements Serializable {
 
   private final EventBus eventBus = EventBusFactory.getDefault().eventBus();
   private Game game;
-  private Account account;
+  private Long accountId;
   @Max(value = 1000)
   private int bet = 0;
   private int hit = -1;
@@ -45,7 +45,7 @@ public class PlayController implements Serializable {
   }
 
   public void submitBet() {
-    game.setBet(account.getId(), bet);
+    game.setBet(accountId, bet);
   }
 
   public void setHit(int hit) {
@@ -57,37 +57,28 @@ public class PlayController implements Serializable {
   }
 
   public String getEndGameMessage() {
-    if (account == null) {
-      return null;
-    }
-    if (account.getWin() < 0) {
-      return "You lost " + -(account.getWin()) + "!!!";
-    } else if (account.getWin() > 0) {
-      return "You won " + account.getWin() + "!!!";
-    } else {
-      return "You draw with the dealer!!!";
-    }
+    return game.getEndGameMessage(accountId);
+  }
+
+  public Account getAccount() {
+    return game.findPlayer(accountId);
   }
 
   public void hitChange() {
-    game.setHit(account.getId(), hit == 1);
-    eventBus.publish("/game/" + game.getId() + "/*", new Command(account.getId(), "UPDATE_LIST", null));
+    game.setHit(accountId, hit == 1);
+    eventBus.publish("/game/" + game.getId() + "/*", new Command(accountId, "UPDATE_LIST", null));
   }
 
   public Game getGame() {
     return game;
   }
 
-  public Account getAccount() {
-    return account;
-  }
-
   public void setGame(Game game) {
     this.game = game;
   }
 
-  public void setAccount(Account account) {
-    this.account = account;
+  public void setAccountId(Long accountId) {
+    this.accountId = accountId;
   }
 
   public List<Account> getPlayers() {
@@ -113,7 +104,7 @@ public class PlayController implements Serializable {
   public void connect() {
     Lucky9.infoInternal("connect " + game.getId());
 
-    if (account == null) {
+    if (accountId == null) {
       Lucky9.infoInternal("null accountId");
       return;
     }
@@ -123,31 +114,23 @@ public class PlayController implements Serializable {
       return;
     }
 
-    Game currentGame = gameList.getCurrentGame(account);
+    Game currentGame = gameList.getCurrentGame(accountId);
     if (currentGame != null && currentGame != game) {
-      currentGame.leave(account.getId());
-      Account a = game.join(account);
-      if (a != null) {
-        account = a;
-      }
-      eventBus.publish("/game/*", new Command(account.getId(), "UPDATE_LIST", null));
+      currentGame.leave(accountId);
+      game.join(accountId);
     } else {
-      Account a = game.join(account);
-      if (a != null) {
-        account = a;
-      }
-      eventBus.publish("/game/" + game.getId() + "/*", new Command(account.getId(), "UPDATE_LIST", null));
+      game.join(accountId);
     }
   }
 
   public void disconnect() {
 
-    if (game != null && account != null) {
-      game.leave(account.getId());
-      eventBus.publish("/game/" + game.getId() + "/*", new Command(account.getId(), "UPDATE_LIST", null));
+    if (game != null && accountId != null) {
+      game.leave(accountId);
+      eventBus.publish("/game/" + game.getId() + "/*", new Command(accountId, "UPDATE_LIST", null));
     }
     game = null;
-    account = null;
+    accountId = null;
     try {
       Faces.redirect("game/index.xhtml");
     } catch (IOException ex) {

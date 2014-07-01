@@ -93,21 +93,37 @@ public class Game implements Serializable {
     return pwb;
   }
 
-  public Account join(Account player) {
-    if (player == null || banker.equals(player)
-            || players.contains(player)
-            || standbyPlayers.contains(player)) {
-      return null;
+  public void join(Long accountId) {
+    if (accountId == null || banker.getId().equals(accountId)) {
+      return;
     }
-    
-    player = accountService.find(player.getId());
-    
+
+    Account player = accountService.find(accountId);
+
     if (state == State.BETTING) {
       players.add(player);
     } else {
       standbyPlayers.add(player);
     }
-    return player;
+  }
+
+  public String getEndGameMessage(Long accountId) {
+    if (accountId == null) {
+      return null;
+    }
+    Account a = findPlayer(accountId);
+    
+    if(a == null){
+      return null;
+    }
+    
+    if (a.getWin() < 0) {
+      return "You lost " + -(a.getWin()) + "!!!";
+    } else if (a.getWin() > 0) {
+      return "You won " + a.getWin() + "!!!";
+    } else {
+      return "You draw with the dealer!!!";
+    }
   }
 
   public void leave(Long playerId) {
