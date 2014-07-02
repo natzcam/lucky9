@@ -115,12 +115,10 @@ public class PlayController implements Serializable {
     }
 
     Game currentGame = gameList.getCurrentGame(accountId);
-    if (currentGame != null && currentGame != game) {
+    if (currentGame != null) {
       currentGame.leave(accountId);
-      game.join(accountId);
-    } else {
-      game.join(accountId);
     }
+    game.join(accountId);
   }
 
   public void disconnect() {
